@@ -10,6 +10,7 @@ library(dplyr)
 ```
 
 ```{r}
+ert_df <- data.frame(ert)
 ert_df_country <- ert_df |>
   filter(country_name == "Mexico")
 
@@ -38,3 +39,4 @@ for (c in countries) {
 
 
 ```
+
