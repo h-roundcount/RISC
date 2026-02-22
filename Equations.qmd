@@ -1,0 +1,22 @@
+---
+title: "Equations"
+author: "Yanna Kats"
+date: "2026-02-21"
+format: html
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(vdemdata)
+
+```
+
+```{r}
+vdem_agg <- vdem |>
+  filter(year==2023) |>
+  group_by(country_name) |>
+  mutate(agg = sum((v2xcl_rol+v2xeg_eqprotec+v2xeg_eqaccess+v2xeg_eqdr+v2pepwrgen+v2pepwrses+v2clgencl-v2caviol+v2caassemb+v2cainsaut-v2cacamps-v2cagenmob+v2x_gencl+v2smgovdom+v2smgovab+v2smgovsmcenprc+v2smpolhate+v2xel_frefair)/100))
+
+
+```
