@@ -1,0 +1,70 @@
+---
+title: "Shapefiles2"
+author: "Yanna Kats"
+date: "2026-02-21"
+format: html
+---
+
+```{r setup, include = FALSE}
+library(tinytex)
+library(tidyverse)  # Data Manipulation
+#install.packages(haven)
+library(haven)      # Read Stata Files - need it to zap labels later - for Krista, this was necessary for rendering but not for running interactively
+#install.packages(sf) # Spatial Data - install once
+library(sf)
+#install.packages(tmap) # install once
+library(tmap)  
+library(ERT)
+
+
+ert <- read.csv("ert.csv")
+
+```
+
+Get data grouped by country:
+
+```{r}
+countries_shp <-st_read("../RISC Project/ne_10m_admin_0_countries_usa/ne_10m_admin_0_countries_usa.shp")
+
+countries_shp_renamed <- countries_shp |>
+  rename("country_text_id" = SOV_A3)
+```
+
+```{r}
+
+ert_df <- data.frame(ert) |>
+  select(country_name, country_text_id, year, dem_ep, row_regch_event, reg_type, dem_ep_termination, dem_ep_outcome_agg)
+view(ert_df)
+
+summary_table <- ert_df %>%
+  group_by(country_name) %>%
+  filter(year == "2018") |>
+  summarise(
+    country_name = country_name[which.max(table(country_name))],
+    country_text_id = country_text_id[which.max(table(country_text_id))],
+    outcome = dem_ep_outcome_agg[which.max(table(dem_ep_outcome_agg))],
+    dem_ep = dem_ep[which.max(table(dem_ep))]
+    
+  ) 
+  
+
+view(summary_table)
+
+map_data <- left_join(countries_shp_renamed, summary_table, join_by(country_text_id))
+
+zap_labels(map_data)
+
+```
+
+```{r}
+library(htmlwidgets)
+
+tmap_mode("view")
+
+map <- tm_shape(map_data) + 
+  tm_polygons("outcome", palette = "Reds", title = "Dem Outcome")
+
+tmap_save(map, "dem_map.html", selfcontained = TRUE)
+
+
+```
