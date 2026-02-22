@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Elements Reference - Massively by HTML5 UP</title>
+		<title>Data By Country</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
+						<a href="index.html" class="logo">RISC</a>
 					</header>
 
 				<!-- Nav -->
@@ -51,23 +51,29 @@
 									By Country</h1>
 								</header>
 
-								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+<input type="text" id="countryInput" placeholder="Enter country name" />
+<button onclick="updatePlots()">Search</button>
 
-<ul id="myUL">
-  <li><a href="#">USA</a></li>
-  <li><a href="#">France</a></li>
-
-  <li><a href="#">Nigeria</a></li>
-  <li><a href="#">China</a></li>
-
-  <li><a href="#">Honduras</a></li>
-  <li><a href="#">Argentina</a></li>
-  <li><a href="#">Norway</a></li>
-</ul>
-
-							</section>
+<iframe id="plot1" width="100%" height="500px"></iframe>
+<iframe id="plot2" width="100%" height="500px"></iframe>
 
 					</div>
+<script>
+	function formatCountry(name) {
+	  return name.trim().replaceAll(" ", "_");
+	}
+	
+	function updatePlots() {
+	  const country = document.getElementById("countryInput").value;
+	  const formatted = formatCountry(country);
+	
+	  document.getElementById("plot1").src = 
+	      "plots/" + formatted + ".html";
+	
+	  document.getElementById("plot2").src = 
+	      "plots/" + formatted + ".html";
+	}
+</script>
 
 				<!-- Footer -->
 					<footer id="footer">
@@ -118,11 +124,6 @@
 						</section>
 					</footer>
 
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
-
 			</div>
 
 		<!-- Scripts -->
@@ -135,4 +136,5 @@
 			<script src="assets/js/main.js"></script>
 
 	</body>
+
 </html>
