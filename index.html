@@ -1,4 +1,34 @@
 <!DOCTYPE HTML>
+
+<style>
+	#intro {
+  background-image: url("images/IMGnegative.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+	#intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* adjust darkness */
+  z-index: 0;
+}
+
+#intro * {
+  position: relative;
+  z-index: 1;
+}
+#main {
+  background-image: url("images/Positive.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+	
+</style>
 <!--
 	Massively by HTML5 UP
 	html5up.net | @ajlkn
@@ -6,7 +36,7 @@
 -->
 <html>
 	<head>
-		<title>Project Name Here Once We Decide</title>
+		<title>Risk Indicator of Social Conflict (RISC)</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,8 +49,8 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>Our Project Bio</h1>
-						<p>Write a little bit about our project here.</p>
+						<h1>"We never saw it coming."</h1>
+						<p>A phrase repeated across the greatest tragedies in human history.</p>
 						<ul class="actions">
 							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
@@ -28,7 +58,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Project Name</a>
+						<a href="index.html" class="logo">RISC</a>
 					</header>
 
 				<!-- Nav -->
@@ -56,7 +86,6 @@
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<span class="date">April 25, 2017</span>
 									<h2><a href="#">And this is a<br />
 									massive headline</a></h2>
 									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
@@ -228,4 +257,5 @@
 			<script src="assets/js/main.js"></script>
 
 	</body>
+
 </html>
