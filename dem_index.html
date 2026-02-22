@@ -1,0 +1,40 @@
+---
+title: "dem_index_plot"
+---
+
+```{r}
+library(ggplot2)
+library(ERT)
+library(dplyr)
+
+```
+
+```{r}
+ert_df_country <- ert_df |>
+  filter(country_name == "Mexico")
+
+
+
+dem_index_plot <- ggplot(data = ert_df_country, aes(x=year, y=v2x_polyarchy))+
+  geom_line(color = "darkslategray") +
+   geom_smooth( orientation= "x", color = "darkslategray1") +
+  xlab("Year") + ylab("EDI Score") +
+  ggtitle("Mexico's Electoral Democracy Index (EDI) Scores Over Time") + theme_bw() + scale_x_continuous(n.breaks = 10)
+
+dem_index_plot
+
+countries <- unique(vdem$country_name)
+
+for (c in countries) {
+
+  p <- make_plot_function(vdem, country = c)
+
+  htmlwidgets::saveWidget(
+    p,
+    file = paste0("plots/", gsub(" ", "_", c), ".html"),
+    selfcontained = TRUE
+  )
+}
+
+
+```
