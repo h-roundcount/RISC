@@ -41,13 +41,14 @@ for (c in countries) {
 
   htmlwidgets::saveWidget(
     p,
-    file = paste0("plots/dem_index/", gsub(" ", "_", c), ".html"),
+    file = paste0("plot/dem_index/", gsub(" ", "_", c), ".html"),
     selfcontained = TRUE
   )
     },
-  warning = function(e) {
+  error = function(e) {
     print("No data found.")
   })
 }
 
 '''
+
