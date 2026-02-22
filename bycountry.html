@@ -59,20 +59,20 @@
 
 					</div>
 <script>
-	function formatCountry(name) {
-	  return name.trim().replaceAll(" ", "_");
-	}
-	
-	function updatePlots() {
-	  const country = document.getElementById("countryInput").value;
-	  const formatted = formatCountry(country);
-	
-	  document.getElementById("plot1").src = 
-	      "plots/" + formatted + ".html";
-	
-	  document.getElementById("plot2").src = 
-	      "plots/" + formatted + ".html";
-	}
+function formatCountry(name) {
+  return name.trim().replaceAll(" ", "_");
+}
+
+function updatePlots() {
+  const country = document.getElementById("countryInput").value;
+  const formatted = formatCountry(country);
+
+  document.getElementById("plot1").src = 
+      "plots/plotTopic1Folder/" + formatted + ".html";
+
+  document.getElementById("plot2").src = 
+      "plots/plotTopic2Folder/" + formatted + ".html";
+}
 </script>
 
 				<!-- Footer -->
@@ -138,3 +138,4 @@
 	</body>
 
 </html>
+
