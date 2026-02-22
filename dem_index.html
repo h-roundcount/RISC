@@ -6,15 +6,17 @@ title: "dem_index_plot"
 library(ggplot2)
 library(ERT)
 library(dplyr)
-
+library(plotly)
+library(htmlwidgets)
 ```
 
 ```{r}
 ert_df <- data.frame(ert)
-ert_df_country <- ert_df |>
-  filter(country_name == "Mexico")
 
+make_plot_function <- function(country) {
 
+  ert_df_country <- ert_df |>
+    filter(country_name == country)
 
 dem_index_plot <- ggplot(data = ert_df_country, aes(x=year, y=v2x_polyarchy))+
   geom_line(color = "darkslategray") +
@@ -22,7 +24,7 @@ dem_index_plot <- ggplot(data = ert_df_country, aes(x=year, y=v2x_polyarchy))+
   xlab("Year") + ylab("EDI Score") +
   ggtitle("Mexico's Electoral Democracy Index (EDI) Scores Over Time") + theme_bw() + scale_x_continuous(n.breaks = 10)
 
-dem_index_plot
+return(ggplotly(dem_index_plot))
 
 countries <- unique(vdem$country_name)
 
@@ -32,11 +34,12 @@ for (c in countries) {
 
   htmlwidgets::saveWidget(
     p,
-    file = paste0("plots/", gsub(" ", "_", c), ".html"),
+    file = paste0("plots/dem_index/", gsub(" ", "_", c), ".html"),
     selfcontained = TRUE
   )
 }
 
 
 ```
+
 
