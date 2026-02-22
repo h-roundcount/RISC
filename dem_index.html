@@ -11,7 +11,8 @@ library(htmlwidgets)
 ```
 
 ```{r}
-ert_df <- data.frame(ert)
+ert<- read.csv("ert.csv")
+ert_df <- data_frame(ert)
 
 make_plot_function <- function(country) {
 
@@ -22,24 +23,31 @@ dem_index_plot <- ggplot(data = ert_df_country, aes(x=year, y=v2x_polyarchy))+
   geom_line(color = "darkslategray") +
    geom_smooth( orientation= "x", color = "darkslategray1") +
   xlab("Year") + ylab("EDI Score") +
-  ggtitle("Mexico's Electoral Democracy Index (EDI) Scores Over Time") + theme_bw() + scale_x_continuous(n.breaks = 10)
+  theme_bw() + scale_x_continuous(n.breaks = 10)
 
 return(ggplotly(dem_index_plot))
 
+}
+
 countries <- unique(vdem$country_name)
+
+
 
 for (c in countries) {
 
-  p <- make_plot_function(vdem, country = c)
+  tryCatch(
+    expr = {
+  p <- make_plot_function(country = c)
 
   htmlwidgets::saveWidget(
     p,
     file = paste0("plots/dem_index/", gsub(" ", "_", c), ".html"),
     selfcontained = TRUE
   )
+    },
+  warning = function(e) {
+    print("No data found.")
+  })
 }
 
-
-```
-
-
+'''
